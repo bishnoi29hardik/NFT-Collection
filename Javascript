@@ -1,46 +1,57 @@
-/*
-Assessment Requirements
-1. Create a variable that can hold a number of NFT's. What type of variable might this be?
-2. Create an object inside your mintNFT function that will hold the metadata for your NFTs. 
-   The metadata values will be passed to the function as parameters. When the NFT is ready, 
-   you will store it in the variable you created in step 1
-3. Your listNFTs() function will print all of your NFTs metadata to the console (i.e. console.log("Name: " + someNFT.name))
-4. For good measure, getTotalSupply() should return the number of NFT's you have created
-*/
+// --------------------------------------------
+// NFT Collection Project
+// Author: Hardik Bishnoi
+// Description: A simple JavaScript program to
+// mint NFTs, list them, and get total supply.
+// --------------------------------------------
 
-// create a variable to hold your NFT's
-const NFT_Collection =[]
+// Array to hold all NFTs
+const NFT_Collection = [];
 
-// this function will take in some values as parameters, create an
-// NFT object using the parameters passed to it for its metadata, 
-// and store it in the variable above.
-function mintNFT (name_p,description_p,attributes_p) {
-    const NFT={
-        "name":name_p,
-        "description":description_p,
-        "attributes":attributes_p
-    }
+/**
+ * Mint a new NFT
+ * @param {string} name - The name of the NFT
+ * @param {string} description - A short description of the NFT
+ * @param {object} attributes - Key-value pairs for NFT metadata
+ */
+function mintNFT(name, description, attributes) {
+    const NFT = {
+        name: name,
+        description: description,
+        attributes: attributes
+    };
     NFT_Collection.push(NFT);
-    console.log("function minNFT exexuted !");
+    console.log(`✅ Minted: ${name}`);
 }
 
-// create a "loop" that will go through an "array" of NFT's
-// and print their metadata with console.log()
-function listNFTs () {
-    for(let i=0;i<NFT_Collection.length;i++){
-        console.log(NFT_Collection[i]);
-    }
-
+/**
+ * List all NFTs in the collection
+ */
+function listNFTs() {
+    console.log("\n📜 NFT Collection:");
+    NFT_Collection.forEach((nft, index) => {
+        console.log(`\n#${index + 1}`);
+        console.log(`Name: ${nft.name}`);
+        console.log(`Description: ${nft.description}`);
+        console.log("Attributes:");
+        for (const [key, value] of Object.entries(nft.attributes)) {
+            console.log(`   - ${key}: ${value}`);
+        }
+    });
 }
 
-// print the total number of NFTs we have minted to the console
+/**
+ * Get total number of NFTs
+ */
 function getTotalSupply() {
-    console.log("Total supply or supplies is or are : "+NFT_Collection.length);
+    console.log(`\n🔢 Total NFTs Minted: ${NFT_Collection.length}`);
 }
 
-// call your functions below this line
-mintNFT('Hardik', 'This is the first NFT', { rarity: 'rare', stamina: 100 });
-mintNFT('Virat', 'This is the second NFT', { rarity: 'common',stamina: 90 });
+// --------------------------------------------
+// Example usage
+// --------------------------------------------
+mintNFT('Hardik', 'This is the first NFT', { rarity: 'Rare', stamina: 100 });
+mintNFT('Virat', 'This is the second NFT', { rarity: 'Common', stamina: 90 });
 
 listNFTs();
 getTotalSupply();
